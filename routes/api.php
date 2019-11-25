@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//  登录
+Route::post('login', 'AuthenticationController@store');
+
+Route::middleware('token.check')->group(function () {
+    //  注销登录
+    Route::delete('logout', 'AuthenticationController@destroy');
+    //  我的登录信息
+    Route::get('/users/me', 'UserController@me');
 });
