@@ -18,7 +18,9 @@ Route::post('login', 'AuthenticationController@store');
 //  注销登录
 Route::delete('logout', 'AuthenticationController@destroy');
 
-Route::middleware('refresh.token')->group(function () {
+Route::middleware([
+    'refresh.token',
+])->group(function () {
     //  我的登录信息
     Route::get('/users/me', 'UserController@me');
 });
