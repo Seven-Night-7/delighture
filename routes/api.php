@@ -14,13 +14,21 @@ use Illuminate\Http\Request;
 */
 
 //  登录
-Route::post('login', 'AuthenticationController@store');
+Route::post('auths', 'AuthenticationController@store');
 //  注销登录
-Route::delete('logout', 'AuthenticationController@destroy');
+Route::delete('auths', 'AuthenticationController@destroy');
 
 Route::middleware([
     'refresh.token',
 ])->group(function () {
     //  我的登录信息
-    Route::get('/users/me', 'UserController@me');
+    Route::get('auths/me', 'AuthenticationController@me');
+
+    //  - 用户
+    Route::get('users', 'UserController@index');
+    Route::post('users', 'UserController@store');
+
+    //  - 冻结的用户
+    Route::post('frozen-users/{user}', 'UserController@freeze');
+    Route::delete('frozen-users/{user}', 'UserController@unfreeze');
 });
