@@ -1,13 +1,5 @@
 # Delighture
 
-> Delighture脚手架要点：
-> 1. 数据库迁移Migration
-> 2. 自定义全局辅助函数Helpers
-> 3. 自定义统一的全局响应与异常
-> 4. 枚举类Enum
-> 5. JWT授权登录与验证
-> 6. 表单验证FormRequest
-
 1. 安装 Laravel 5.8，配置基础 `.env` 信息
 
 2. 使用命令 `php artisan make:migration create_users_table` 创建基础用户表，迁移代码如下

@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use App\Enums\StatusCode;
 use Closure;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware AS JWTBaseMiddleware;
@@ -25,7 +25,7 @@ class TokenCheckMiddleware extends JWTBaseMiddleware
             $auth = JWTAuth::parseToken();
         } catch (JWTException $exception) {
             //  token不存在
-            throw new HttpResponseException(json_response(StatusCode::MISSING_TOKEN));
+            throw new UnauthorizedHttpException('jwt-auth', $exception->getMessage(), null, StatusCode::MISSING_TOKEN);
         }
 
         if ($auth->check()) {
@@ -42,7 +42,7 @@ class TokenCheckMiddleware extends JWTBaseMiddleware
 
         } catch (JWTException $exception) {
             // 如果捕获到此异常，即代表 refresh 也过期了，用户无法刷新令牌，需要重新登录。
-            throw new HttpResponseException(json_response(StatusCode::TOKEN_ERROR, [], $exception->getMessage()));
+            throw new UnauthorizedHttpException('jwt-auth', $exception->getMessage(), null, StatusCode::TOKEN_ERROR);
         }
 
         //  在响应头中返回新的 token

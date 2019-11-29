@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\StatusCode;
 use App\Http\Requests\AuthenticationRequest;
 use App\Models\User;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends BaseController
 {
@@ -21,15 +21,12 @@ class AuthenticationController extends BaseController
             return $this->response(StatusCode::USER_IS_FROZEN);
         }
 
-        $token = JWTAuth::attempt([
-            'account' => $request->account,
-            'password' => $request->password,
-        ]);
+        $token = Auth::attempt($request->only('account','password'));
         if (!$token) {
             return $this->response(StatusCode::LOGIN_ERROR);
         }
 
-        return $this->response(StatusCode::SUCCESS, ['token' => 'bearer ' . $token], '登录成功');
+        return $this->response(StatusCode::SUCCESS, ['token' => 'Bearer ' . $token], '登录成功');
     }
 
     /**
@@ -38,7 +35,7 @@ class AuthenticationController extends BaseController
      */
     public function destroy()
     {
-        JWTAuth::parseToken()->invalidate();
+        Auth::logout();
 
         return $this->response(StatusCode::SUCCESS, [], '注销登录成功');
     }
