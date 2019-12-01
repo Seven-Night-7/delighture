@@ -1,0 +1,36 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass extends BaseController
+{
+    //  列表
+    public function index()
+    {
+        //
+    }
+
+    //  详情
+    public function show()
+    {
+        //
+    }
+
+    //  新增
+    public function store()
+    {
+        //
+    }
+
+    //  修改
+    public function update()
+    {
+        //
+    }
+
+    //  删除
+    public function destroy()
+    {
+        //
+    }
+}

@@ -1,0 +1,28 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass extends FormRequest
+{
+    /**
+     * 验证规则
+     * @return array
+     */
+    public function rules()
+    {
+        switch ($this->method())
+        {
+            case 'GET':
+                return [];
+        }
+    }
+
+    /**
+     * 属性名称
+     * @return array
+     */
+    public function attributes()
+    {
+        return [];
+    }
+}

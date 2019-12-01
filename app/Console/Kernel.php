@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\DtController::class,
+        Commands\DtModel::class,
+        Commands\DtRequest::class,
     ];
 
     /**
