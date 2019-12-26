@@ -13,12 +13,11 @@ class AuthenticationController extends BaseController
     /**
      * 登录
      * @param AuthenticationRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function store(AuthenticationRequest $request)
     {
-        $is_freeze = User::where('account', $request->account)->value('status');
-        if ($is_freeze) {
+        if (User::where('account', $request->account)->value('status') == 1) {
             return $this->response(StatusCode::USER_IS_FROZEN);
         }
 
@@ -32,7 +31,7 @@ class AuthenticationController extends BaseController
 
     /**
      * 注销登录
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function destroy()
     {
@@ -44,7 +43,7 @@ class AuthenticationController extends BaseController
     /**
      * 获取我的登录信息
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function me(Request $request)
     {

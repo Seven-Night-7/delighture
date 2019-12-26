@@ -15,12 +15,12 @@ use Illuminate\Http\Request;
 
 //  登录
 Route::post('auths', 'AuthenticationController@store');
-//  注销登录
-Route::delete('auths', 'AuthenticationController@destroy');
 
 Route::middleware([
     'refresh.token',
 ])->group(function () {
+    //  注销登录
+    Route::delete('auths', 'AuthenticationController@destroy');
     //  我的登录信息
     Route::get('auths/me', 'AuthenticationController@me');
 

@@ -11,10 +11,10 @@ class BaseController extends Controller
      * @param int $statusCode
      * @param array $data
      * @param string $message
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function response($statusCode = StatusCode::SUCCESS, $data = [], $message = '')
     {
-        return json_response($statusCode, $data, $message);
+        return response_format($statusCode, $data, $message);
     }
 }

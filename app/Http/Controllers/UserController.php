@@ -10,7 +10,7 @@ class UserController extends BaseController
 {
     /**
      * 列表
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function index()
     {
@@ -20,7 +20,7 @@ class UserController extends BaseController
     /**
      * 新增
      * @param UserRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function store(UserRequest $request)
     {
@@ -35,7 +35,7 @@ class UserController extends BaseController
     /**
      * 冻结用户
      * @param User $user
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function freeze(User $user)
     {
@@ -48,7 +48,7 @@ class UserController extends BaseController
     /**
      * 解冻用户
      * @param User $user
-     * @return \Illuminate\Http\JsonResponse
+     * @return array
      */
     public function unfreeze(User $user)
     {

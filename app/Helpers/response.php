@@ -1,15 +1,17 @@
 <?php
 
-//  统一响应
+//  统一响应格式
+function response_format($statusCode, $data, $message)
+{
+    return [
+        'status_code' => $statusCode,
+        'message' => $message ? $message : \App\Enums\StatusCode::getStatusMessage($statusCode),
+        'data' => $data,
+    ];
+}
+
+//  快捷响应
 function json_response($statusCode, $data = [], $message = '')
 {
-    $message = $message ?
-        $message : (isset(\App\Enums\StatusCode::$statusMessage[$statusCode]) ?
-            \App\Enums\StatusCode::$statusMessage[$statusCode] : '未知状态码');
-
-    return response()->json([
-        'status_code' => $statusCode,
-        'message' => $message,
-        'data' => $data,
-    ]);
+    return response()->json(response_format($statusCode, $data, $message));
 }

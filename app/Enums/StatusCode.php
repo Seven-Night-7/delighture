@@ -38,4 +38,14 @@ final class StatusCode extends Enum
         -30000 => 'token异常',
         -30001 => 'token不存在',
     ];
+
+    /**
+     * 获取状态码信息
+     * @param $statusCode
+     * @return mixed|string
+     */
+    public static function getStatusMessage($statusCode)
+    {
+        return isset(self::$statusMessage[$statusCode]) ? self::$statusMessage[$statusCode] : '未知状态码';
+    }
 }
